@@ -4,14 +4,24 @@ var num1 = parseInt($('#no').text());
 $(document).ready(function (){
     $('#ip').text(isip);
     $.ajax({
-        type: "get",
-        url: "http://localhost:80/Clickip/num.php",
-        success: function (data) {
-            alert(data);
-        }
+        type: "GET",
+        url: "num.php",
+        beforeSend: LoadFunction,
+        error: erryFunction,
+        success: succFunction
     })
     // $('#yes').append('1');
-
+    function LoadFunction() {
+        $('#yes').html('加载中...');
+    }
+    function erryFunction() {
+        alert('error');
+    }
+    function succFunction(tt) {
+        tt = tt.replace(/\"/g,"");
+        $('#yes').html(" "+tt);
+        // alert(tt);
+    }
 })
 
 $('body').click(function (){

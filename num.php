@@ -1,18 +1,21 @@
 <?php
-
+    // header("content-type:application/json");  
     $dbhost = 'localhost:3306'; 
     $dbuser = 'root';
     $dbpasswd = 'hy815923';
 
-    $con = mysqli_connect($dbhost, $dbuser, $dbpasswd);
+    $connect = mysqli_connect($dbhost, $dbuser, $dbpasswd);
     $sql = "select count(*) from ClickIP";
-    mysqli_select_db($con, 'ehum_db');
+    mysqli_select_db($connect, 'ehum_db');
 
-    $retval = mysqli_query($con, $sql);
-    if(!$retval){
-        dir('无法查询数据库：'. mysqli_error($con));
-    }
-    echo '数据库插入成功！';
-    echo $retval;
-    mysqli_close($con);
+    $result = mysqli_query($connect, $sql);
+    // $row = mysql_num_rows($result);
+    // while($row = mysql_fetch_array($result)){
+    //     echo $row['id']. " " .$row['ip'];
+    //     echo "<br />";
+    // }
+    list($row_num) = $result->fetch_row();
+    // $arr = array('id' => 1, 'ipcount' => $result);
+    echo json_encode($row_num);
+    mysqli_close($connect);
 ?>
