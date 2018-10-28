@@ -1,8 +1,17 @@
 var isip = returnCitySN["cip"];
 // alert(isip);
-
+var num1 = parseInt($('#no').text());
 $(document).ready(function (){
     $('#ip').text(isip);
+    $.ajax({
+        type: "get",
+        url: "num.php",
+        success: function (data) {
+            alert(data);
+        }
+    })
+    // $('#yes').append('1');
+
 })
 
 $('body').click(function (){
@@ -12,16 +21,8 @@ $('body').click(function (){
         dataType: 'json',
         data: {ip: isip},
         success: function (msg) {
-            var data = '';;
-            if(msg != ''){
-                data = eval("("+msg+")");
-            }
-            if(data.su == 'success'){
-                alert('Done');
-            }else{
-                alert('错误');
-            }
-            console.log(data);
+            $('#no').text(num1+=1);
+            // console.log(data);
         },
         error:function (msg) {
             console.log(msg);
