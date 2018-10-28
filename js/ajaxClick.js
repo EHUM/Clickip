@@ -5,7 +5,7 @@ $(document).ready(function (){
     $('#ip').text(isip);
     $.ajax({
         type: "get",
-        url: "num.php",
+        url: "http://localhost:80/Clickip/num.php",
         success: function (data) {
             alert(data);
         }
